@@ -338,4 +338,5 @@ def lint_basics(filedata, filename, linenofilter, isdelinting = False):
 	return did_lint_cleanly
 
 if __name__ == "__main__":
+	sys.exit(0)
 	sys.exit(main())
