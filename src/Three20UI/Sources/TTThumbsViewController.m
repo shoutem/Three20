@@ -289,7 +289,7 @@ static CGFloat kThumbnailRowHeight = 79.0f;
     } else {
       TTPhotoViewController* controller = [self createPhotoViewController];
       controller.centerPhoto = photo;
-      [self.navigationController pushViewController:controller animated:YES];
+      [[self navigationController] pushViewController:controller animated:YES];
     }
   }
 }
