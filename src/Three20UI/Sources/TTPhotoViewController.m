@@ -85,7 +85,7 @@ static const NSInteger kActivityLabelTag          = 96;
     self.statusBarStyle = UIStatusBarStyleBlackOpaque;
     self.navigationBarStyle = UIBarStyleBlackOpaque;
     self.navigationBarTintColor = nil;
-    //self.wantsFullScreenLayout = YES;
+    self.wantsFullScreenLayout = YES;
     self.hidesBottomBarWhenPushed = YES;
 
     self.defaultImage = TTIMAGE(@"bundle://Three20.bundle/images/photoDefault.png");
@@ -482,12 +482,18 @@ static const NSInteger kActivityLabelTag          = 96;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)showBarsAnimationDidStop {
   self.navigationController.navigationBarHidden = NO;
+    
+    _scrollView.frame = CGRectMake(0.0f, -32.0f, _scrollView.frame.size.width, _scrollView.frame.size.height);
+    NSLog(@"Show animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)hideBarsAnimationDidStop {
   self.navigationController.navigationBarHidden = YES;
+    
+    _scrollView.frame = CGRectMake(0.0f, 0.0f, _scrollView.frame.size.width, _scrollView.frame.size.height);
+    NSLog(@"Hide animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
 }
 
 
@@ -557,6 +563,8 @@ static const NSInteger kActivityLabelTag          = 96;
   _toolbar.items = [NSArray arrayWithObjects:
                     space, _previousButton, space, _actionButton, space, _nextButton, space, nil];
   [_innerView addSubview:_toolbar];
+    
+    _scrollView.frame = CGRectMake(0.0f, -32.0f, _scrollView.frame.size.width, _scrollView.frame.size.height);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -648,7 +656,7 @@ static const NSInteger kActivityLabelTag          = 96;
   }
 
   [self showCaptions:show];
-
+    
   _toolbar.alpha = alpha;
 
   if (animated) {
