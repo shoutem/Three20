@@ -245,12 +245,18 @@ static const NSInteger kActivityLabelTag          = 96;
     
     if (_toolbar.alpha)
     {
-    CGFloat height = UIDeviceOrientationIsPortrait(interfaceOrientation) ? 480.0f : 320.0f;
-    CGFloat delta  = UIDeviceOrientationIsPortrait(interfaceOrientation) ? -64.0f : -52.0f;
-    _scrollView.frame = CGRectMake(0.0f, delta, _scrollView.frame.size.width, height);
+        CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : 480.0f;
+        CGFloat delta = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? -52.0f : -64.0f;
+        _scrollView.frame = CGRectMake(0.0f, delta, _scrollView.frame.size.width, height);
     }
+    else
+    {
+        CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : 480.0f;
+        _scrollView.frame = CGRectMake(0.0f, 0.0f, _scrollView.frame.size.width, height);
+    }
+        
     
-        NSLog(@"Hide animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
+    NSLog(@"Rotate animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
 }
 
 
@@ -491,9 +497,9 @@ static const NSInteger kActivityLabelTag          = 96;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)showBarsAnimationDidStop {
   self.navigationController.navigationBarHidden = NO;
-
-    CGFloat height = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? 480.0f : 320.0f;
-    CGFloat delta  = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? -64.0f : -52.0f;
+    
+    CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : 480.0f;
+    CGFloat delta = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? -52.0f : -64.0f;
     _scrollView.frame = CGRectMake(0.0f, delta, _scrollView.frame.size.width, height);
     
     NSLog(@"Show animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
@@ -504,10 +510,9 @@ static const NSInteger kActivityLabelTag          = 96;
 - (void)hideBarsAnimationDidStop {
   self.navigationController.navigationBarHidden = YES;
     
-    NSLog(@"Device orientation %d", [[UIDevice currentDevice] orientation]);
-    CGFloat height = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? 480.0f : 320.0f;
-    
+    CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : 480.0f;
     _scrollView.frame = CGRectMake(0.0f, 0.0f, _scrollView.frame.size.width, height);
+    
     NSLog(@"Hide animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
 }
 
@@ -579,8 +584,8 @@ static const NSInteger kActivityLabelTag          = 96;
                     space, _previousButton, space, _actionButton, space, _nextButton, space, nil];
   [_innerView addSubview:_toolbar];
     
-    CGFloat height = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? 480.0f : 320.0f;
-    CGFloat delta  = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? -64.0f : -52.0f;
+    CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : 480.0f;
+    CGFloat delta = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? -52.0f : -64.0f;
     _scrollView.frame = CGRectMake(0.0f, delta, _scrollView.frame.size.width, height);
 }
 
