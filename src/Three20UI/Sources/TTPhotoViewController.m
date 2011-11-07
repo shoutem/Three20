@@ -242,6 +242,15 @@ static const NSInteger kActivityLabelTag          = 96;
 - (void)updateToolbarWithOrientation:(UIInterfaceOrientation)interfaceOrientation {
   _toolbar.height = TTToolbarHeight();
   _toolbar.top = self.view.height - _toolbar.height;
+    
+    if (_toolbar.alpha)
+    {
+    CGFloat height = UIDeviceOrientationIsPortrait(interfaceOrientation) ? 480.0f : 320.0f;
+    CGFloat delta  = UIDeviceOrientationIsPortrait(interfaceOrientation) ? -64.0f : -52.0f;
+    _scrollView.frame = CGRectMake(0.0f, delta, _scrollView.frame.size.width, height);
+    }
+    
+        NSLog(@"Hide animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
 }
 
 
@@ -482,8 +491,11 @@ static const NSInteger kActivityLabelTag          = 96;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)showBarsAnimationDidStop {
   self.navigationController.navigationBarHidden = NO;
+
+    CGFloat height = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? 480.0f : 320.0f;
+    CGFloat delta  = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? -64.0f : -52.0f;
+    _scrollView.frame = CGRectMake(0.0f, delta, _scrollView.frame.size.width, height);
     
-    _scrollView.frame = CGRectMake(0.0f, -32.0f, _scrollView.frame.size.width, _scrollView.frame.size.height);
     NSLog(@"Show animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
 }
 
@@ -492,7 +504,10 @@ static const NSInteger kActivityLabelTag          = 96;
 - (void)hideBarsAnimationDidStop {
   self.navigationController.navigationBarHidden = YES;
     
-    _scrollView.frame = CGRectMake(0.0f, 0.0f, _scrollView.frame.size.width, _scrollView.frame.size.height);
+    NSLog(@"Device orientation %d", [[UIDevice currentDevice] orientation]);
+    CGFloat height = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? 480.0f : 320.0f;
+    
+    _scrollView.frame = CGRectMake(0.0f, 0.0f, _scrollView.frame.size.width, height);
     NSLog(@"Hide animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
 }
 
@@ -564,7 +579,9 @@ static const NSInteger kActivityLabelTag          = 96;
                     space, _previousButton, space, _actionButton, space, _nextButton, space, nil];
   [_innerView addSubview:_toolbar];
     
-    _scrollView.frame = CGRectMake(0.0f, -32.0f, _scrollView.frame.size.width, _scrollView.frame.size.height);
+    CGFloat height = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? 480.0f : 320.0f;
+    CGFloat delta  = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? -64.0f : -52.0f;
+    _scrollView.frame = CGRectMake(0.0f, delta, _scrollView.frame.size.width, height);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
