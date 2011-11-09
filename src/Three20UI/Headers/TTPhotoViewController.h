@@ -56,6 +56,8 @@
   TTThumbsViewController* _thumbsController;
 
   id<TTPhotoSource> _photoSource;
+    
+    BOOL transitioning;
 }
 
 /**

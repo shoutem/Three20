@@ -489,6 +489,15 @@ static const NSInteger kActivityLabelTag          = 96;
 
 - (void)actionButtonPressed
 {
+    //[[UIDevice currentDevice] setOrientation:UIDeviceOrientationPortrait];
+    if ([[UIDevice currentDevice] orientation] != UIDeviceOrientationPortrait)
+    {
+        transitioning = YES;
+        UIViewController *temp = [[[UIViewController alloc] init] autorelease];
+        [self.navigationController pushViewController:temp animated:NO];
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+    
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"photoAction" 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:_centerPhotoIndex] forKey:@"photoIndex"]];
@@ -606,6 +615,7 @@ static const NSInteger kActivityLabelTag          = 96;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewWillAppear:(BOOL)animated {
+    transitioning = NO;
   [super viewWillAppear:animated];
   [self updateToolbarWithOrientation:self.interfaceOrientation];
 }
@@ -625,6 +635,9 @@ static const NSInteger kActivityLabelTag          = 96;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if (transitioning)
+        return interfaceOrientation == UIInterfaceOrientationPortrait;
+    
   return TTIsSupportedOrientation(interfaceOrientation);
 }
 
