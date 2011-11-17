@@ -57,9 +57,9 @@ static CGFloat kThumbnailRowHeight = 79.0f;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    self.statusBarStyle = UIStatusBarStyleBlackOpaque;
-    self.navigationBarStyle = UIBarStyleBlackOpaque;
-    self.navigationBarTintColor = nil;
+    //self.statusBarStyle = UIStatusBarStyleBlackOpaque;
+    //self.navigationBarStyle = UIBarStyleBlackOpaque;
+    self.navigationBarTintColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
     //self.wantsFullScreenLayout = YES;
     self.hidesBottomBarWhenPushed = YES;
   }
