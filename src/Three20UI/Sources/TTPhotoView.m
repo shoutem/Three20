@@ -302,6 +302,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)showProgress:(CGFloat)progress {
+
   if (progress >= 0) {
     if (!_statusSpinner) {
       _statusSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
@@ -309,16 +310,27 @@
       [self addSubview:_statusSpinner];
     }
 
-    [_statusSpinner startAnimating];
-    _statusSpinner.hidden = NO;
-    [self showStatus:nil];
-    [self setNeedsLayout];
-
+      NSLog(@"Photo version %d, photo: %@", _photoVersion, _photo);
+      
+    if (_photoVersion == TTPhotoVersionThumbnail || _photoVersion == TTPhotoVersionNone)
+    {
+        [_statusSpinner startAnimating];
+        _statusSpinner.hidden = NO;
+        [self showStatus:nil];
+        [self setNeedsLayout];
+    }
+    else 
+    {
+        [_statusSpinner stopAnimating];
+        _statusSpinner.hidden = YES;
+    }
+      
   } else {
     [_statusSpinner stopAnimating];
     _statusSpinner.hidden = YES;
     _captionLabel.hidden = !!_statusLabel.text.length;
   }
+
 }
 
 

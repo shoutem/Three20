@@ -500,7 +500,8 @@ static const NSInteger kActivityLabelTag          = 96;
     
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"photoAction" 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:_centerPhotoIndex] forKey:@"photoIndex"]];
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:_centerPhotoIndex], @"photoIndex",
+                                                                    _photoSource, @"source", nil]];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
