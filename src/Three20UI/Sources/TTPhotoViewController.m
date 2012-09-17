@@ -245,13 +245,13 @@ static const NSInteger kActivityLabelTag          = 96;
     
     if (_toolbar.alpha)
     {
-        CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : 480.0f;
+        CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : [[UIScreen mainScreen] bounds].size.height;
         CGFloat delta = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? -52.0f : -64.0f;
         _scrollView.frame = CGRectMake(0.0f, delta, _scrollView.frame.size.width, height);
     }
     else
     {
-        CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : 480.0f;
+        CGFloat height = UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? 320.0f : [[UIScreen mainScreen] bounds].size.height;
         _scrollView.frame = CGRectMake(0.0f, 0.0f, _scrollView.frame.size.width, height);
     }
         
