@@ -526,6 +526,18 @@ static const NSInteger kActivityLabelTag          = 96;
     NSLog(@"Hide animation finished, frame: %@", NSStringFromCGRect(_scrollView.frame));
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)updateActionButtonStateWithPhoto:(id<TTPhoto>)photo {
+    BOOL actionButtonEnabled = YES;
+    if (photo) {
+        actionButtonEnabled = [photo supportsDetailsAction];
+    }
+    
+    if (_actionButton) {
+        _actionButton.enabled = actionButtonEnabled;
+    }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -563,6 +575,7 @@ static const NSInteger kActivityLabelTag          = 96;
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(actionButtonPressed)];
+    [self updateActionButtonStateWithPhoto:self.centerPhoto];
 	
   _previousButton =
     [[UIBarButtonItem alloc] initWithImage:
@@ -1027,6 +1040,7 @@ static const NSInteger kActivityLabelTag          = 96;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didMoveToPhoto:(id<TTPhoto>)photo fromPhoto:(id<TTPhoto>)fromPhoto {
+  [self updateActionButtonStateWithPhoto:photo];
 }
 
 

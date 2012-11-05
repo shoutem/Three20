@@ -45,6 +45,13 @@
 @property (nonatomic, copy) NSString* caption;
 
 /**
+ * Defines whether this photo supports details action.
+ * If this property is true, an action for opening details
+ * about this photo will be available when viewing the photo.
+ */
+@property (nonatomic, assign) BOOL supportsDetailsAction;
+
+/**
  * Gets the URL of one of the differently sized versions of the photo.
  */
 - (NSString*)URLForVersion:(TTPhotoVersion)version;
